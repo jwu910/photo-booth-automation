@@ -6,3 +6,5 @@ This script will combine an overlay image with a second image, save a copy, and 
 ### Technologies used:
 - watchdog
 - Python Imaging Library (PIL)
+
+**Trash commit line**
