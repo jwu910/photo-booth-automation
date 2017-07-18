@@ -5,7 +5,7 @@ from watchdog.events import PatternMatchingEventHandler
 currentImage = ''
 
 class handleChanges(PatternMatchingEventHandler):
-    patterns = ["*.jpg", "*.txt"]
+    patterns = ["*.jpg", "*.txt"] # .jpg and .txt for now. txt will be removed for production.
 
     def process(self, event):
         """
@@ -24,11 +24,6 @@ class handleChanges(PatternMatchingEventHandler):
             print 'hello this was created'
         elif event.event_type == 'deleted':
             print 'oh shit its gone'
-
-
-
-    def on_modified(self, event):
-        self.process(event)
 
     def on_created(self, event):
         currentImage = event.src_path
