@@ -9,22 +9,24 @@ while True:
     processAllPictures = raw_input('Process all incoming pictures? (Y/N/Quit): ').lower()
 
     if processAllPictures == 'y':
-        print 'yes'
+        print 'All incoming pictures will be processed. Ctrl + C to quit.'
         processAllPictures = True
         break
     elif processAllPictures == 'n':
-        print 'no'
+        print 'Pictures must be manually selected to be processed. Ctrl + C to quit.'
         processAllPictures = False
         break
     elif processAllPictures == 'quit':
         raise SystemExit
         break
     else:
-        print "Invalid response, please indicate 'y' for yes and 'n' for no"
+        print "Invalid response, please indicate 'y' for yes or 'n' for no"
 
 
 class handleChanges(PatternMatchingEventHandler):
     patterns = ["*.jpg", "*.txt"] # .jpg and .txt for now. txt will be removed for production.
+    processAllPictures = processAllPictures
+    print 'process all pics', processAllPictures
 
     def process(self, event):
         """
