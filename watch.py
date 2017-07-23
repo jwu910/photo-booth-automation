@@ -1,8 +1,19 @@
-import time, sys
+import time, sys, os
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
 currentImage = ''
+originalFolder = 'original-folder/' # Folder to keep a copy of the originals
+watchFolder = 'watch-folder/' # Folder to watch for new images.
+saveFolder = 'save-folder/' # Folder to save images after they have been processed.
+printFolder = 'print-folder/' # Watch folder to print images.
+'''
+# Flow of images follow this
+1. Picture is taken and written to watch-folder/
+2. Copy of original is made in original-folder/ and image is processed and saved in saveFolder/
+3. If user decides to process all pictures, after image is processed, one copy gets written to printFolder/
+    - If user decides to manually select, User decides which pictures to print and manually copies an image to the print-folder/
+'''
 
 # set boolean variable to determine if this will process ALL pictures, or manually select pictures. Variable processAllPictures? = boolean by user input.
 while True:
