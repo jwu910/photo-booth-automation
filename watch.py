@@ -70,6 +70,10 @@ class handleChanges(PatternMatchingEventHandler):
 			print 'print folder found'
 
 	def on_created(self, event):
+		"""
+		on_created() handles file creation
+		depending on where file was created (taken from fileInfo[1]), appropriate function will be invoked
+		"""
 		currentImage = event.src_path
 
 		fileInfo = event.src_path.split('/')
@@ -83,6 +87,9 @@ class handleChanges(PatternMatchingEventHandler):
 			print '----------------------------------------'
 
 	def on_deleted(self, event):
+		"""
+		on_deleted() prints name of file deleted from name of directory
+		"""
 		fileInfo = event.src_path.split('/')
 
 		print fileInfo[2] + ' deleted from ' + fileInfo[1]
@@ -92,12 +99,14 @@ def processImage(currentImage):
 	"""
 	processImage() should take currentImage parameter and overlay the overlayImage above it.
 	The combined picture should be written to save folder
+	This function should call processImage.py to create the overlay and pass the image file back in to main watch.py to move it to the appropriate folders.
 	"""
 	print currentImage + ' is the current image and is being processed...'
 
 def printImage(currentImage):
 	"""
 	printImage() should take currentImage parameter and initiate print sequence.
+	Possible to have this function call print.py to batch print all files in print folder to keep it modularized'
 	"""
 	print currentImage + ' is set to be printed...'
 
