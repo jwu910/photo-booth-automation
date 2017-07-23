@@ -33,7 +33,6 @@ while True:
     else:
         print "Invalid response, please indicate 'y' for yes or 'n' for no"
 
-
 class handleChanges(PatternMatchingEventHandler):
     patterns = ["*.jpg", "*.txt"] # .jpg and .txt for now. txt will be removed for production.
     processAllPictures = processAllPictures
@@ -54,8 +53,15 @@ class handleChanges(PatternMatchingEventHandler):
         # Check event type. looking for created event and/or deleted event for now
         if event.event_type == 'created':
             print 'hello this was created'
+            currentImage = event.src_path
+
+            os.system('cp ' + currentImage + ' ./' + originalFolder)
+            print 'copied to ' + originalFolder
+            processImage(currentImage)
+
         elif event.event_type == 'deleted':
             print 'oh shit its gone'
+
 
     def on_created(self, event):
         currentImage = event.src_path
