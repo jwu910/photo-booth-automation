@@ -4,8 +4,29 @@ from watchdog.events import PatternMatchingEventHandler
 
 currentImage = ''
 
+# set boolean variable to determine if this will process ALL pictures, or manually select pictures. Variable processAllPictures? = boolean by user input.
+while True:
+    processAllPictures = raw_input('Process all incoming pictures? (Y/N/Quit): ').lower()
+
+    if processAllPictures == 'y':
+        print 'All incoming pictures will be processed. Ctrl + C to quit.'
+        processAllPictures = True
+        break
+    elif processAllPictures == 'n':
+        print 'Pictures must be manually selected to be processed. Ctrl + C to quit.'
+        processAllPictures = False
+        break
+    elif processAllPictures == 'quit':
+        raise SystemExit
+        break
+    else:
+        print "Invalid response, please indicate 'y' for yes or 'n' for no"
+
+
 class handleChanges(PatternMatchingEventHandler):
     patterns = ["*.jpg", "*.txt"] # .jpg and .txt for now. txt will be removed for production.
+    processAllPictures = processAllPictures
+    print 'process all pics', processAllPictures
 
     def process(self, event):
         """
