@@ -70,10 +70,21 @@ class handleChanges(PatternMatchingEventHandler):
     def on_deleted(self, event):
         self.process(event)
 
+
+# Should these functions be outside of class?
+def processImage(currentImage):
+    """
+    processImage() should take currentImage parameter and overlay the overlayImage above it.
+    The combined picture should be written to save folder
+    """
+    print currentImage + 'this is the current image'
+
+
+
 if __name__ == '__main__':
     args = sys.argv[1:]
     observer = Observer()
-    observer.schedule(handleChanges(), path=args[0] if args else '.')
+    observer.schedule(handleChanges(), path=args[0] if args else './' + watchFolder)
     observer.start()
 
     try:
@@ -84,9 +95,5 @@ if __name__ == '__main__':
 
     observer.join()
 
-# define library requirements
-
-
-# need to declare save and print directories
 # set base image
 # set overlay image
