@@ -3,6 +3,7 @@ from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
 currentImage = ''
+fileInfo = []
 originalFolder = 'original-folder' # Folder to keep a copy of the originals
 watchFolder = 'watch-folder' # Folder to watch for new images. --Needs watch
 saveFolder = 'save-folder' # Folder to save images after they have been processed.
@@ -37,7 +38,7 @@ class handleChanges(PatternMatchingEventHandler):
 	patterns = ["*.jpg", "*.txt"] # .jpg and .txt for now. txt will be removed for production.
 	processAllPictures = processAllPictures
 
-	def processImage(self, event):
+	def handleImage(self, event):
 		"""
 		event.event_type
 			'modified' | 'created' | 'moved' | 'deleted'
@@ -47,21 +48,23 @@ class handleChanges(PatternMatchingEventHandler):
 			path/to/observed/file
 		"""
 
-		fileInfo = event.src_path.split('/') # Create array with directory information and file name.
-		print fileInfo[1]
-		print event.src_path, event.event_type  # print now only for degug
+		# Create array with directory information and file name.
+		fileInfo = event.src_path.split('/')
+		print fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
 
 		# Check event type. looking for created event and/or deleted event for now
 		if event.event_type == 'created' and fileInfo[1] == watchFolder:
+
+			# Assign current image on new image creation
 			currentImage = event.src_path
 
-			os.system('cp ' + currentImage + ' ./' + saveFolder + '/')
+			# Make an original copy of the incoming image
 			os.system('cp ' + currentImage + ' ./' + originalFolder + '/')
-
 			print 'copied to ' + originalFolder
-			print 'saved to ' + saveFolder
 
-			processImage(currentImage)
+			# Handle image and then compress and save image in saveFolder
+			# os.system('cp ' + currentImage + ' ./' + saveFolder + '/')
+			print 'saved to ' + saveFolder
 
 		elif event.event_type == 'deleted':
 			print 'oh shit its gone'
@@ -76,10 +79,13 @@ class handleChanges(PatternMatchingEventHandler):
 		"""
 		currentImage = event.src_path
 
+		# Create array with directory information and file name.
 		fileInfo = event.src_path.split('/')
+		print fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
 
 		if fileInfo[1] == watchFolder:
-			self.processImage(event)
+			print 'New image found. Processing...'
+			self.handleImage(event)
 		elif fileInfo[1] == printFolder:
 			# self.printFile(event) # Invoke printFile function with current image
 			print '----------------------------------------'
