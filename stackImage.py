@@ -6,6 +6,9 @@ prefixText = 'Maywood2017'
 # Watch folder to print images.
 printFolder = 'print-folder'
 
+# Save folder to save images.
+saveFolder = 'save-folder'
+
 def stackImage(currentImage, overlayImage):
     """
     stackImage takes two arguments, args[0] is the base image and args[1] is the image to superimpose over the base.
@@ -22,7 +25,7 @@ def stackImage(currentImage, overlayImage):
     overlay = Image.open(overlayImage)
 
     background.paste(overlay, (0, 0), overlay)
-    background.save(printFolder + '/' + prefixText + fileInfo[2])
+    background.save(saveFolder + '/' + prefixText + fileInfo[2])
 
     print fileInfo[2] + ' saved to save-folder.'
     print 'stackImage completed...'
