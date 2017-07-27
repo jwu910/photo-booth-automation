@@ -2,3 +2,7 @@
 
 # Watchdog used for directory monitoring
 watchdog
+
+# Pillow used for image manipulation
+Pillow
+
