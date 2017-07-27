@@ -2,12 +2,30 @@ import time, sys, os
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
+# import stackimage to process image stacking
+from stackImage import *
+
 currentImage = ''
 fileInfo = []
-originalFolder = 'original-folder' # Folder to keep a copy of the originals
-watchFolder = 'watch-folder' # Folder to watch for new images. --Needs watch
-saveFolder = 'save-folder' # Folder to save images after they have been processed.
-printFolder = 'print-folder' # Watch folder to print images. --Needs watch
+
+# Preceeding text for picture file names -- Create json file for configs for prefix text, overlay image to be used, etc
+prefixText = 'Maywood2017'
+
+# Define image being used for overlay
+overlayImage = './overlay.png'
+
+# Folder to keep a copy of the originals
+originalFolder = 'original-folder'
+
+# Watch folder to print images.
+printFolder = 'print-folder'
+
+# Folder to save images after they have been processed
+saveFolder = 'save-folder'
+
+# Folder to watch for new images
+watchFolder = 'watch-folder'
+
 """
 # Flow of images follow this
 1. Picture is taken and written to watch-folder/
@@ -64,13 +82,11 @@ class handleChanges(PatternMatchingEventHandler):
 
 			# Handle image and then compress and save image in saveFolder
 			# os.system('cp ' + currentImage + ' ./' + saveFolder + '/')
+			processImage(currentImage)
 			print 'saved to ' + saveFolder
 
-		elif event.event_type == 'deleted':
-			print 'oh shit its gone'
-
-		if event.event_type == 'created' and fileInfo[1] == printFolder:
-			print 'print folder found'
+			os.system('rm ' + watchFolder + '/' + fileInfo[2])
+			print 'Image cleared.'
 
 	def on_created(self, event):
 		"""
@@ -108,6 +124,7 @@ def processImage(currentImage):
 	This function should call processImage.py to create the overlay and pass the image file back in to main watch.py to move it to the appropriate folders.
 	"""
 	print currentImage + ' is the current image and is being processed...'
+	stackImage(currentImage, overlayImage)
 
 def printImage(currentImage):
 	"""
