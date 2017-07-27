@@ -2,11 +2,30 @@ import time, sys, os
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
+# import stackimage to process image stacking
+from stackImage import *
+
 currentImage = ''
-originalFolder = 'original-folder' # Folder to keep a copy of the originals
-watchFolder = 'watch-folder' # Folder to watch for new images. --Needs watch
-saveFolder = 'save-folder' # Folder to save images after they have been processed.
-printFolder = 'print-folder' # Watch folder to print images. --Needs watch
+fileInfo = []
+
+# Preceeding text for picture file names -- Create json file for configs for prefix text, overlay image to be used, etc
+prefixText = 'Maywood2017'
+
+# Define image being used for overlay
+overlayImage = './overlay.png'
+
+# Folder to keep a copy of the originals
+originalFolder = 'original-folder'
+
+# Watch folder to print images.
+printFolder = 'print-folder'
+
+# Folder to save images after they have been processed
+saveFolder = 'save-folder'
+
+# Folder to watch for new images
+watchFolder = 'watch-folder'
+
 """
 # Flow of images follow this
 1. Picture is taken and written to watch-folder/
@@ -37,7 +56,7 @@ class handleChanges(PatternMatchingEventHandler):
 	patterns = ["*.jpg", "*.txt"] # .jpg and .txt for now. txt will be removed for production.
 	processAllPictures = processAllPictures
 
-	def processImage(self, event):
+	def handleImage(self, event):
 		"""
 		event.event_type
 			'modified' | 'created' | 'moved' | 'deleted'
@@ -47,27 +66,27 @@ class handleChanges(PatternMatchingEventHandler):
 			path/to/observed/file
 		"""
 
-		fileInfo = event.src_path.split('/') # Create array with directory information and file name.
-		print fileInfo[1]
-		print event.src_path, event.event_type  # print now only for degug
+		# Create array with directory information and file name.
+		fileInfo = event.src_path.split('/')
+		print fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
 
 		# Check event type. looking for created event and/or deleted event for now
 		if event.event_type == 'created' and fileInfo[1] == watchFolder:
+
+			# Assign current image on new image creation
 			currentImage = event.src_path
 
-			os.system('cp ' + currentImage + ' ./' + saveFolder + '/')
+			# Make an original copy of the incoming image
 			os.system('cp ' + currentImage + ' ./' + originalFolder + '/')
-
 			print 'copied to ' + originalFolder
+
+			# Handle image and then compress and save image in saveFolder
+			# os.system('cp ' + currentImage + ' ./' + saveFolder + '/')
+			processImage(currentImage)
 			print 'saved to ' + saveFolder
 
-			processImage(currentImage)
-
-		elif event.event_type == 'deleted':
-			print 'oh shit its gone'
-
-		if event.event_type == 'created' and fileInfo[1] == printFolder:
-			print 'print folder found'
+			os.system('rm ' + watchFolder + '/' + fileInfo[2])
+			print 'Image cleared.'
 
 	def on_created(self, event):
 		"""
@@ -76,10 +95,13 @@ class handleChanges(PatternMatchingEventHandler):
 		"""
 		currentImage = event.src_path
 
+		# Create array with directory information and file name.
 		fileInfo = event.src_path.split('/')
+		print fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
 
 		if fileInfo[1] == watchFolder:
-			self.processImage(event)
+			print 'New image found. Processing...'
+			self.handleImage(event)
 		elif fileInfo[1] == printFolder:
 			# self.printFile(event) # Invoke printFile function with current image
 			print '----------------------------------------'
@@ -102,6 +124,7 @@ def processImage(currentImage):
 	This function should call processImage.py to create the overlay and pass the image file back in to main watch.py to move it to the appropriate folders.
 	"""
 	print currentImage + ' is the current image and is being processed...'
+	stackImage(currentImage, overlayImage)
 
 def printImage(currentImage):
 	"""
