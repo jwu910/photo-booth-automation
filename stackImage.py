@@ -22,7 +22,7 @@ def stackImage(currentImage, overlayImage):
     overlay = Image.open(overlayImage)
 
     background.paste(overlay, (0, 0), overlay)
-    print fileInfo
     background.save(printFolder + '/' + prefixText + fileInfo[2])
 
+    print fileInfo[2] + ' saved to save-folder.'
     print 'stackImage completed...'
