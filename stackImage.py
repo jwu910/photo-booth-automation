@@ -9,24 +9,28 @@ printFolder = 'print-folder'
 # Save folder to save images.
 saveFolder = 'save-folder'
 
-def stackImage(currentImage, overlayImage):
-    """
-    stackImage takes two arguments, args[0] is the base image and args[1] is the image to superimpose over the base.
-    This function will take two images, and return one image.
-    """
-    fileInfo = currentImage.split('/')
+def stackImage(currentImage, overlayImage, processAllPictures):
+	"""
+	stackImage takes two arguments, args[0] is the base image and args[1] is the image to superimpose over the base.
+	This function will take two images, and return one image.
+	"""
+	fileInfo = currentImage.split('/')
 
-    print 'stackImage started...'
-    # Base image
-    print 'DEBUG backround image = ' + currentImage
-    background = Image.open(open(currentImage,'rb'))
-    print currentImage + ' is your base image'
+	print 'stackImage started...'
+	# Base image
+	print 'DEBUG backround image = ' + currentImage
+	background = Image.open(currentImage)
+	print currentImage + ' is your base image'
 
-    # Overlay image
-    overlay = Image.open(overlayImage)
+	# Overlay image
+	overlay = Image.open(overlayImage)
 
-    background.paste(overlay, (0, 0), overlay)
-    background.save(saveFolder + '/' + prefixText + fileInfo[2])
+	background.paste(overlay, (0, 0), overlay)
+	background.save(saveFolder + '/' + prefixText + fileInfo[2])
 
-    print fileInfo[2] + ' saved to save-folder.'
-    print 'stackImage completed...'
+	# If processAllPictures all pictures set to True
+	if processAllPictures:
+		background.save(printFolder + '/' + prefixText + fileInfo[2])
+
+	print fileInfo[2] + ' saved to save-folder.'
+	print 'stackImage completed...'

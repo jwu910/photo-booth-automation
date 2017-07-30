@@ -124,7 +124,7 @@ def processImage(currentImage):
 	This function should call processImage.py to create the overlay and pass the image file back in to main watch.py to move it to the appropriate folders.
 	"""
 	print currentImage + ' is the current image and is being processed...'
-	stackImage(currentImage, overlayImage)
+	stackImage(currentImage, overlayImage, processAllPictures)
 
 def printImage(currentImage):
 	"""
