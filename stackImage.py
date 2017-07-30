@@ -18,7 +18,8 @@ def stackImage(currentImage, overlayImage):
 
     print 'stackImage started...'
     # Base image
-    background = Image.open(currentImage)
+    print 'DEBUG backround image = ' + currentImage
+    background = Image.open(open(currentImage,'rb'))
     print currentImage + ' is your base image'
 
     # Overlay image

@@ -53,7 +53,7 @@ while True:
 		print "Invalid response, please indicate 'y' for yes or 'n' for no"
 
 class handleChanges(PatternMatchingEventHandler):
-	patterns = ["*.jpg", "*.txt"] # .jpg and .txt for now. txt will be removed for production.
+	patterns = ["*.jpg", "*.JPG", "*.jpeg", "*.JPEG"]
 	processAllPictures = processAllPictures
 
 	def handleImage(self, event):
