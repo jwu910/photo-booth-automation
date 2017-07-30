@@ -1,3 +1,5 @@
 {
-    "prefixText": "Maywood2017"
+    "configs": {
+		"prefixText": "Maywood2017"
+	}
 }
