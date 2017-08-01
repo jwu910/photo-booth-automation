@@ -5,4 +5,5 @@ This script will combine an overlay image with a second image, save a copy, and 
 
 ### Libraries used:
 - watchdog
-- Python Imaging Library (PIL)
+- Pillow
+- json

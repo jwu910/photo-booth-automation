@@ -80,22 +80,21 @@ class handleChanges(PatternMatchingEventHandler):
 			os.system('cp ' + currentImage + ' ./' + originalFolder + '/')
 			print 'copied to ' + originalFolder
 
-			# Handle image and then compress and save image in saveFolder
-			# os.system('cp ' + currentImage + ' ./' + saveFolder + '/')
+			# Pass image in to processImage function
 			processImage(currentImage)
-			print 'saved to ' + saveFolder
+			print 'Current image saved to ' + saveFolder
 
 			os.system('rm ' + watchFolder + '/' + fileInfo[2])
-			print 'Image cleared.'
+			print 'Image cleared from watch folder.'
 
 	def on_created(self, event):
 		"""
 		on_created() handles file creation
-		depending on where file was created (taken from fileInfo[1]), appropriate function will be invoked
+		Depending on where file was created (taken from fileInfo[1]), appropriate function will be invoked
 		"""
 		currentImage = event.src_path
 
-		# Create array with directory information and file name.
+		# Create array with directory information and file name
 		fileInfo = event.src_path.split('/')
 		print fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
 
@@ -104,13 +103,12 @@ class handleChanges(PatternMatchingEventHandler):
 			self.handleImage(event)
 		elif fileInfo[1] == printFolder:
 			# self.printFile(event) # Invoke printFile function with current image
-			print '----------------------------------------'
-			print 'file created in print folder!'
-			print '----------------------------------------'
+			print 'Placeholder text for image being printed. This line should call print function with image passed in.'
 
 	def on_deleted(self, event):
 		"""
-		on_deleted() prints name of file deleted from name of directory
+		on_deleted() prints name of file deleted from name of directory.
+		This function does not process images, just print's notification that image was deleted from respective directory.
 		"""
 		fileInfo = event.src_path.split('/')
 
@@ -129,7 +127,7 @@ def processImage(currentImage):
 def printImage(currentImage):
 	"""
 	printImage() should take currentImage parameter and initiate print sequence.
-	Possible to have this function call print.py to batch print all files in print folder to keep it modularized'
+	Placeholder function for images being printed.'
 	"""
 	print currentImage + ' is set to be printed...'
 

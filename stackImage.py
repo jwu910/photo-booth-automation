@@ -16,10 +16,9 @@ def stackImage(currentImage, overlayImage, processAllPictures):
 	"""
 	fileInfo = currentImage.split('/')
 
-	print 'stackImage started...'
+	print '==========----- stackImage started... -----=========='
 	# Base image
 	background = Image.open(currentImage)
-	print currentImage + ' is set as base image'
 
 	# Overlay image
 	overlay = Image.open(overlayImage)
@@ -27,10 +26,11 @@ def stackImage(currentImage, overlayImage, processAllPictures):
 	# Stack two images
 	background.paste(overlay, (0, 0), overlay)
 	background.save(saveFolder + '/' + prefixText + fileInfo[2])
+	print 'Completed image saved to save-folder.'
 
 	# If processAllPictures all pictures set to True, save a copy to the print-folder.
 	if processAllPictures:
 		background.save(printFolder + '/' + prefixText + fileInfo[2])
+		print 'Current image sent to print.'
 
-	print fileInfo[2] + ' saved to save-folder.'
-	print 'stackImage completed...'
+	print '==========----- stackImage completed... -----=========='
