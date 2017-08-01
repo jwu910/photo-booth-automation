@@ -4,6 +4,13 @@ Base watch structure built off of (Bruno Rocha's guide)[http://brunorocha.org/py
 
 This script will combine an overlay image with a second image, save a copy, and print.
 
+<<<<<<< HEAD
 ### Technologies used:
 - watchdog
 - Python Imaging Library (PIL)
+=======
+### Libraries used:
+- watchdog
+- Pillow
+- json
+>>>>>>> development
