@@ -4,7 +4,18 @@ Base watch structure built off of (Bruno Rocha's guide)[http://brunorocha.org/py
 
 This script will combine an overlay image with a second image, save a copy, and print.
 
-### Libraries used:
-- watchdog
-- Pillow
-- json
+### Requirements
+- Python 2.7
+
+  #### Libraries used:
+  - watchdog
+  - Pillow
+  - json
+
+### Run:
+Navigate to /PATH/photo-booth-automation/ and run
+```
+python watch.py
+```
+
+Note: see /tests/README.md for testing instructions.
