@@ -13,9 +13,9 @@ This script will combine an overlay image with a second image, save a copy, and 
   - json
 
 ### Run:
-Navigate to /PATH/photo-booth-automation/ and run
+Navigate to `/PATH/photo-booth-automation/` and run
 ```
 python watch.py
 ```
 
-Note: see /tests/README.md for testing instructions.
+Note: see `/tests/README.md` for testing instructions.
