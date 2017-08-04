@@ -1,10 +1,7 @@
 #### Requirements ####
 
 # Watchdog used for directory monitoring
-watchdog
+watchdog==0.8.3
 
 # Pillow used for image manipulation
-Pillow
-
-# Json used for userConfigs
-json
+Pillow==4.2.1
