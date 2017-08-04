@@ -51,7 +51,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ### Acknowledgments
 
-* Thanks to [AlChiu](https://github.com/AlChiu), [phuchle](https://github.com/phuchle), and [rainrivas](https://github.com/rainrivas) for putting up with 24 hour activity notifications, catching my mistakes, and putting up with all of my review requests.
+* Thanks to [AlChiu](https://github.com/AlChiu), [psyduc](https://github.com/psyduc), [phuchle](https://github.com/phuchle), and [rainrivas](https://github.com/rainrivas) for putting up with 24 hour activity notifications, catching my mistakes, and putting up with all of my review requests.
 
 #### tl;dr:
 1. `git clone https://github.com/jwu910/photo-booth-automation.git`
