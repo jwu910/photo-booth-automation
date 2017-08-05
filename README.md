@@ -1,28 +1,36 @@
 # photo-booth-automation
-Automation script intended to assist in photo booth management.
-Base watch structure built off of [Bruno Rocha's guide](http://brunorocha.org/python/watching-a-directory-for-file-changes-with-python.html)
+I started this project to help me operate a photo booth for an event later this year. When I found myself editing images, superimposing overlays, and printing on the fly, I said that there had to be a way to automate this. I found some pre-made software online already, but it didn't quite fit my needs so this project came to be. I hope others may find a use for this in support of some small events they may have have.
 
-This script will combine an overlay image with a second image, save a copy, and print.
+Base directory watch structure built off of [Bruno Rocha's guide](http://brunorocha.org/python/watching-a-directory-for-file-changes-with-python.html)
 
-## Get the good stuff
+##### What this does:
+Stacks an overlay image over incoming base images (in my use case from a tethered DSLR)
+
+### What you'll need first
+* [Python 2.7](https://www.python.org/downloads/)
+* [Python PIP](https://bootstrap.pypa.io/get-pip.py) - If you don't already have PIP, download and run `python get-pip.py`
+
+### Get the good stuff
 ```
 git clone https://github.com/jwu910/photo-booth-automation.git
 ```
-
-### What you'll need first
-[Python 2.7](https://www.python.org/downloads/)
 
 ### Getting it working
 From `/PATH/photo-booth-automation/`
 ```
 pip install -r requirements.txt
 ```
+You may want to replace overlay.png with your own overlay image. Currently overlay image needs to be named overlay.png.
+**Overlay image should share the same dimensions as incoming images**
+
+*- Scalable overlay images to come in the future. -*
 
 ### Hit the ground running
 Navigate to `/PATH/photo-booth-automation/` and run
 ```
-python watch.py
+python watch.py [path/to/watch/directory/parent]
 ```
+Program will run in root directory if none is given.
 
 Note: see `/tests/README.md` for testing instructions.
 
@@ -57,6 +65,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 1. `git clone https://github.com/jwu910/photo-booth-automation.git`
 2. `cd /PATH/photo-booth-automation`
 3. `pip install -r requirements.txt`
-4. `python watch.py`
-5. Take or add pictures to `watch-folder/`
-6. View images in `save-folder/`
+4. Replace overlay.png with your own.
+5. `python watch.py`
+6. Take or add pictures to `watch-folder/`
+7. View images in `save-folder/`
