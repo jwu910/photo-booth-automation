@@ -1,5 +1,12 @@
 {
     "configs": {
-		"prefixText": "Maywood2017"
+		"overlayImage": "./overlay.png",
+		"prefixText": "Maywood2017",
+		"folders": {
+			"watch": "watch-folder",
+			"print": "print-folder",
+			"save": "save-folder",
+			"original": "original-folder"
+		}
 	}
 }
