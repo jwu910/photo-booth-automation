@@ -104,6 +104,10 @@ class handleChanges(PatternMatchingEventHandler):
 		elif fileInfo[1] == printFolder:
 			# self.printFile(event) # Invoke printFile function with current image
 			print 'Placeholder text for image being printed. This line should call print function with image passed in.'
+			self.handleImage(event)
+
+
+
 
 	def on_deleted(self, event):
 		"""
@@ -130,6 +134,7 @@ def printImage(currentImage):
 	Placeholder function for images being printed.'
 	"""
 	print currentImage + ' is set to be printed...'
+	printImage(currentImage)
 
 if __name__ == '__main__':
 	args = sys.argv[1:]
