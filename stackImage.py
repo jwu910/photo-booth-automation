@@ -1,6 +1,8 @@
 from PIL import Image
 import json
 
+# This file should become library of function definitions to be used by watch.py. No lines should be written outside of function.
+
 # Preceeding text for picture file names -- Create json file for configs for prefix text, overlay image to be used, etc
 with open('userConfigs.json') as config_data:
 	configs = json.load(config_data)['configs']
