@@ -73,6 +73,11 @@ class handleChanges(PatternMatchingEventHandler):
 
 			os.system('rm ' + watchFolder + '/' + fileInfo[2])
 			print 'Image cleared from watch folder.'
+		elif event.event_type == 'created' and fileInfo[1] == printFolder:
+
+			currentImage = event.src_path
+
+			printImage(currentImage)
 
 	def on_created(self, event):
 		"""
@@ -89,12 +94,8 @@ class handleChanges(PatternMatchingEventHandler):
 			print 'New image found. Processing...'
 			self.handleImage(event)
 		elif fileInfo[1] == printFolder:
-			# self.printFile(event) # Invoke printFile function with current image
 			print 'Placeholder text for image being printed. This line should call print function with image passed in.'
 			self.handleImage(event)
-
-
-
 
 	def on_deleted(self, event):
 		"""
@@ -118,10 +119,9 @@ def processImage(currentImage):
 def printImage(currentImage):
 	"""
 	printImage() should take currentImage parameter and initiate print sequence.
-	Placeholder function for images being printed.'
 	"""
-	print currentImage + ' is set to be printed...'
-	printImage(currentImage)
+	print currentImage + ' is being printed...'
+	sendToPrinter(currentImage)
 
 if __name__ == '__main__':
 	args = sys.argv[1:]
