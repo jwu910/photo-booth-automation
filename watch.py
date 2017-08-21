@@ -1,40 +1,27 @@
-import time, sys, os
+import json, os, sys, time
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
-# import stackimage to process image stacking
+# Import supporting files
 from stackImage import *
+from printImage import *
 
 currentImage = ''
 fileInfo = []
 
-# Preceeding text for picture file names -- Create json file for configs for prefix text, overlay image to be used, etc
-prefixText = 'Maywood2017'
+with open('userConfigs.json') as config_data:
+	configs = json.load(config_data)['configs']
+	folders = configs['folders']
 
-# Define image being used for overlay
-overlayImage = './overlay.png'
+# Variables should be changed in userConfigs.json instead of in this file.
+prefixText = configs['prefixText']
+overlayImage = configs['overlayImage']
+originalFolder = folders['original']
+printFolder = folders['print']
+saveFolder = folders['save']
+watchFolder = folders['watch']
 
-# Folder to keep a copy of the originals
-originalFolder = 'original-folder'
-
-# Watch folder to print images.
-printFolder = 'print-folder'
-
-# Folder to save images after they have been processed
-saveFolder = 'save-folder'
-
-# Folder to watch for new images
-watchFolder = 'watch-folder'
-
-"""
-# Flow of images follow this
-1. Picture is taken and written to watch-folder/
-2. Copy of original is made in original-folder/ and image is processed and saved in saveFolder/
-3. If user decides to process all pictures, after image is processed, one copy gets written to printFolder/
-	- If user decides to manually select, User decides which pictures to print and manually copies an image to the print-folder/
-"""
-
-# set boolean variable to determine if this will process ALL pictures, or manually select pictures. Variable processAllPictures? = boolean by user input.
+# User input to determine whether all images will be automatically or manually printed.
 while True:
 	processAllPictures = raw_input('Process all  pictures? (Y/N/Quit): ').lower()
 
