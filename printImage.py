@@ -1,12 +1,16 @@
 import os
 
-def printImage(currentImage):
+
+def sendToPrinter(currentImage):
 	"""
-	stackImage takes three arguments, args[0] is the base image, args[1] is the image to superimpose over the base, and args[2] will define whether printing is added in to the default work flow or not.
-	This function will take two images, and return one image.
+	sendToPrinter
 	"""
 	fileInfo = currentImage.split('/')
 	print fileInfo
+	print 'WERE IN PRINTER'
 
-
+	os.system("lpr -P Brother-MFC-L2740DW-series " + currentImage)
 # os.system("lpr -P printer_name file_name.txt")
+# http://www.it.uu.se/datordrift/maskinpark/skrivare/cups/
+# lpoptions -d Brother-MFC-L2740DW-series -l
+# lpr -P Brother-MFC-L2740DW-series -o media=Custom.4x6in overlay.png
