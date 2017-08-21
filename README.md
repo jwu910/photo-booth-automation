@@ -39,6 +39,9 @@ Once the script is running, your `watch-folder/` should be the destination direc
 
 Whether you decide to use this script to support tethered shooting or you just want to stack the overlay over images as a bulk process, it could be done. Your `watch-folder/` directory will handle this completely. If you have your tethered shooting to save directly to the `watch-folder/`, the images will be processed as soon as they are taken. You can also simply drop a copy of any images to be processed in the `watch-folder/` as well.
 
+### Custom configs
+Configs are stored in `userConfigs.json`. Default folder names are included in this repository, but should you decide you want to change the directory names, update the folder names in the json file. The json file also contains the path to the overlay image being used, as well as prefix text used for file naming.
+
 ### Contributing
 
 Please read [CONTRIBUTING.md](https://github.com/jwu910/photo-booth-automation/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.

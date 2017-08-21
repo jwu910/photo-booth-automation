@@ -1,13 +1,15 @@
 from PIL import Image
+import json
 
 # Preceeding text for picture file names -- Create json file for configs for prefix text, overlay image to be used, etc
-prefixText = 'Maywood2017'
+with open('userConfigs.json') as config_data:
+	configs = json.load(config_data)['configs']
+	folders = configs['folders']
 
-# Watch folder to print images.
-printFolder = 'print-folder'
-
-# Save folder to save images.
-saveFolder = 'save-folder'
+# Variable declaration.
+prefixText = configs['prefixText']
+printFolder = folders['print']
+saveFolder = folders['save']
 
 def stackImage(currentImage, overlayImage, processAllPictures):
 	"""
