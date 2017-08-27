@@ -1,10 +1,15 @@
-import json, os, sys, time
-from watchdog.observers import Observer
+import cups
+import json
+import os
+import sys
+import time
+
 from watchdog.events import PatternMatchingEventHandler
+from watchdog.observers import Observer
 
 # Import supporting files
-from stackImage import *
 from printImage import *
+from stackImage import *
 
 currentImage = ''
 fileInfo = []
@@ -13,9 +18,10 @@ with open('userConfigs.json') as config_data:
 	configs = json.load(config_data)['configs']
 	folders = configs['folders']
 
-# Variables should be changed in userConfigs.json instead of in this file.
-prefixText = configs['prefixText']
+# Sync variables with userConfigs.json.
 overlayImage = configs['overlayImage']
+prefixText = configs['prefixText']
+
 originalFolder = folders['original']
 printFolder = folders['print']
 saveFolder = folders['save']
