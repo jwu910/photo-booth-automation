@@ -1,5 +1,5 @@
 {
-    "configs": {
+	"configs": {
 		"overlayImage": "./overlay.png",
 		"prefixText": "Maywood2017",
 		"folders": {
@@ -7,6 +7,8 @@
 			"print": "print-folder",
 			"save": "save-folder",
 			"original": "original-folder"
-		}
+		},
+		"paperSize": "4x6",
+		"dimensions": "1800x1200"
 	}
 }
