@@ -17,6 +17,7 @@ fileInfo = []
 with open('userConfigs.json') as config_data:
 	configs = json.load(config_data)['configs']
 	folders = configs['folders']
+	size = configs['dimensions']
 
 # Sync variables with userConfigs.json.
 overlayImage = configs['overlayImage']
@@ -27,23 +28,37 @@ printFolder = folders['print']
 saveFolder = folders['save']
 watchFolder = folders['watch']
 
+width = size['width']
+height = size['height']
+
+# Define console output colors
+class color:
+	BOLD = '\033[1m' # No color
+	ENDC = '\033[0m'
+	FAIL = '\033[91m' # Red
+	HEADER = '\033[95m' # Purple
+	OKBLUE = '\033[94m' # Blue
+	OKGREEN = '\033[92m' # Green
+	UNDERLINE = '\033[4m' # No color
+	WARNING = '\033[93m' # Yellow
+
 # User input to determine whether all images will be automatically or manually printed.
 while True:
-	processAllPictures = raw_input('Process all  pictures? (Y/N/Quit): ').lower()
+	processAllPictures = raw_input(color.OKBLUE + 'Process all  pictures? (Y/N/Quit): ' + color.ENDC).lower()
 
 	if processAllPictures == 'y':
-		print 'All  pictures will be processed. Ctrl + C to quit.'
+		print '[Log] ' +'All  pictures will be processed. Ctrl + C to quit.'
 		processAllPictures = True
 		break
 	elif processAllPictures == 'n':
-		print 'Pictures must be manually selected to be processed. Ctrl + C to quit.'
+		print '[Log] ' +'Pictures must be manually selected to be processed. Ctrl + C to quit.'
 		processAllPictures = False
 		break
 	elif processAllPictures == 'quit':
 		raise SystemExit
 		break
 	else:
-		print "Invalid response, please indicate 'y' for yes or 'n' for no"
+		print '[Log] ' +"Invalid response, please indicate 'y' for yes or 'n' for no"
 
 class handleChanges(PatternMatchingEventHandler):
 	patterns = ["*.jpg", "*.JPG", "*.jpeg", "*.JPEG"]
@@ -61,7 +76,7 @@ class handleChanges(PatternMatchingEventHandler):
 
 		# Create array with directory information and file name.
 		fileInfo = event.src_path.split('/')
-		print fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
+		print '[Log] ' +fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
 
 		# Check event type. looking for created event and/or deleted event for now
 		if event.event_type == 'created' and fileInfo[1] == watchFolder:
@@ -71,19 +86,19 @@ class handleChanges(PatternMatchingEventHandler):
 
 			# Make an original copy of the incoming image
 			os.system('cp ' + currentImage + ' ./' + originalFolder + '/')
-			print 'copied to ' + originalFolder
+			print '[Log] ' +'copied to ' + originalFolder
 
 			# Pass image in to processImage function
 			processImage(currentImage)
-			print 'Current image saved to ' + saveFolder
+			print '[Log] ' +'Current image saved to ' + saveFolder
 
 			os.system('rm ' + watchFolder + '/' + fileInfo[2])
-			print 'Image cleared from watch folder.'
+			print '[Log] ' +'Image cleared from watch folder.'
 		elif event.event_type == 'created' and fileInfo[1] == printFolder:
 
 			currentImage = event.src_path
 
-			printImage(currentImage)
+			printImage(currentImage, width, height)
 
 	def on_created(self, event):
 		"""
@@ -94,13 +109,12 @@ class handleChanges(PatternMatchingEventHandler):
 
 		# Create array with directory information and file name
 		fileInfo = event.src_path.split('/')
-		print fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
+		print '[Log] ' +fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
 
 		if fileInfo[1] == watchFolder:
-			print 'New image found. Processing...'
+			print '[Log] ' +'New image found. Processing...'
 			self.handleImage(event)
 		elif fileInfo[1] == printFolder:
-			print 'Placeholder text for image being printed. This line should call print function with image passed in.'
 			self.handleImage(event)
 
 	def on_deleted(self, event):
@@ -110,7 +124,7 @@ class handleChanges(PatternMatchingEventHandler):
 		"""
 		fileInfo = event.src_path.split('/')
 
-		print fileInfo[2] + ' deleted from ' + fileInfo[1]
+		print '[Log] ' +fileInfo[2] + ' deleted from ' + fileInfo[1]
 
 # Should these functions be outside of class?
 def processImage(currentImage):
@@ -119,15 +133,19 @@ def processImage(currentImage):
 	The combined picture should be written to save folder
 	This function should call processImage.py to create the overlay and pass the image file back in to main watch.py to move it to the appropriate folders.
 	"""
-	print currentImage + ' is the current image and is being processed...'
+
+	print '[Log] ' +color.OKGREEN + currentImage + color.ENDC
+	print '[Log] ' +color.OKGREEN + str(width) + " " + str(height) + color.ENDC
+
+	print '[Log] ' +currentImage + ' is the current image and is being processed...'
 	stackImage(currentImage, overlayImage, processAllPictures)
 
-def printImage(currentImage):
+def printImage(currentImage, width, height):
 	"""
-	printImage() should take currentImage parameter and initiate print sequence.
+	printImage() should take 3 arguments. (path/to/current/image, width, height). Path should be contained within currentImage variable, and width and height should be defined by userConfigs.
 	"""
-	print currentImage + ' is being printed...'
-	sendToPrinter(currentImage)
+	print '[Log] ' +currentImage + ' is being printed...'
+	sendToPrinter(currentImage, width, height)
 
 if __name__ == '__main__':
 	args = sys.argv[1:]
