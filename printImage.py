@@ -11,7 +11,7 @@ def sendToPrinter(currentImage):
 	"""
 	#conn = cups.Connection()
 	#printers = conn.getPrinters()
-	default_printer = 'EPSON-XP-430-Series'#printers.keys()[0]
+	default_printer = 'EPSON_XP_430_Series'#printers.keys()[0]
 	# fileInfo = currentImage.split('/')
 
 	# img = Image.open(currentImage)

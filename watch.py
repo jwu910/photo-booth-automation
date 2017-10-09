@@ -145,7 +145,7 @@ def printImage(currentImage, width, height):
 	printImage() should take 3 arguments. (path/to/current/image, width, height). Path should be contained within currentImage variable, and width and height should be defined by userConfigs.
 	"""
 	print '[Log] ' +currentImage + ' is being printed...'
-	sendToPrinter(currentImage, width, height)
+	sendToPrinter(currentImage)
 
 if __name__ == '__main__':
 	args = sys.argv[1:]
