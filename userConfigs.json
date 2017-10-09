@@ -9,6 +9,9 @@
 			"original": "original-folder"
 		},
 		"paperSize": "4x6",
-		"dimensions": "1800x1200"
+		"dimensions": {
+			"width": 1200,
+			"height": 800
+			}
 	}
 }
