@@ -24,10 +24,11 @@ if answer:
 	confirmation = raw_input('Are you sure? (y/n)').lower()
 
 	if confirmation == 'y':
-		os.system('rm ../original-folder/*')
-		os.system('rm ../save-folder/*')
-		os.system('rm ../print-folder/*')
-		os.system('rm ../watch-folder/*')
+		# os.system('rm ../original-folder/*')
+		# os.system('rm ../save-folder/*')
+		# os.system('rm ../print-folder/*')
+		# os.system('rm ../watch-folder/*')
+		print '!==== ERROR ====! - Cannot clear with this.'
 	else:
 		print 'Exiting'
 		raise SystemExit
