@@ -5,6 +5,3 @@ watchdog==0.8.3
 
 # Pillow used for image manipulation
 Pillow==4.2.1
-
-# CUPS used for printing
-pycups==1.9.73

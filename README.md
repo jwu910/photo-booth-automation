@@ -3,6 +3,9 @@ I started this project to help me operate a photo booth for an event later this 
 
 Base directory watch structure built off of [Bruno Rocha's guide](http://brunorocha.org/python/watching-a-directory-for-file-changes-with-python.html)
 
+## Note
+This branch has been adjusted for this current OSX setup.
+
 ##### What this does:
 Stacks an overlay image over incoming base images (in my use case from a tethered DSLR)
 
