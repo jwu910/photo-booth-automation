@@ -76,7 +76,7 @@ class handleChanges(PatternMatchingEventHandler):
 
 		# Create array with directory information and file name.
 		fileInfo = event.src_path.split('/')
-		print '[Log] ' +fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
+		print '[Log] ' + fileInfo[2] + ' was ' + event.event_type + ' in ' + fileInfo[1]
 
 		# Check event type. looking for created event and/or deleted event for now
 		if event.event_type == 'created' and fileInfo[1] == watchFolder:
