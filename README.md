@@ -41,7 +41,7 @@ Whether you decide to use this script to support tethered shooting or you just w
 
 ### Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/jwu910/photo-booth-automation/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/jwu910/photo-booth-automation/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ### Versioning
 
