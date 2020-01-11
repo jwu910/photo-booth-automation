@@ -1,5 +1,9 @@
 import os, sys, time
+import json
 print sys.argv
+
+with open('../userConfigs.json') as config_data:
+	configs = json.load(config_data)['configs']
 
 # Testing with large input.
 imagesToCreate = int(sys.argv[1])
@@ -22,9 +26,9 @@ print str(imagesToCreate) + ' files created.'
 
 for num in range(0, imagesToCreate):
 	# Check save-folder
-	if os.path.exists('../save-folder/Maywood2017' + imageList[num]):
+	if os.path.exists('../save-folder/' + configs['prefixText'] + imageList[num]):
 		print imageList[num] + ' exists in save-folder. Deleting.'
-		os.system('rm ../save-folder/Maywood2017' + imageList[num])
+		os.system('rm ../save-folder/' + configs['prefixText'] + imageList[num])
 	else:
 		print imageList[num] + ' was not found.'
 		missingImages.append(imageList[num])

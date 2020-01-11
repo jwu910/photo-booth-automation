@@ -1,7 +1,7 @@
 {
 	"configs": {
 		"overlayImage": "./overlay.png",
-		"prefixText": "Maywood2018",
+		"prefixText": "Maywood2019",
 		"folders": {
 			"watch": "watch-folder",
 			"print": "print-folder",
