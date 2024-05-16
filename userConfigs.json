@@ -1,7 +1,7 @@
 {
 	"configs": {
 		"overlayImage": "./overlay.png",
-		"prefixText": "Maywood2019",
+		"prefixText": "TestPrefix1200_800",
 		"folders": {
 			"watch": "watch-folder",
 			"print": "print-folder",
@@ -10,8 +10,8 @@
 		},
 		"paperSize": "4x6",
 		"dimensions": {
-			"width": 1200,
-			"height": 800
+			"width": 4512,
+			"height": 3008
 			}
 	}
 }
