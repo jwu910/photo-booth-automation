@@ -1,7 +1,2 @@
-#### Requirements ####
-
-# Watchdog used for directory monitoring
-watchdog==0.8.3
-
-# Pillow used for image manipulation
-Pillow==10.0.1
+pillow==13.0.0
+watchdog==7.0.0
